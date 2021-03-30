@@ -10,8 +10,8 @@
        <class>com.unicam.model.User</class>
          <properties>
             <property name="hibernate.ogm.datastore.provider" value="mongodb" />
-             <property name="hibernate.ogm.datastore.host" value="localhost:27017"/>
-            <property name="hibernate.ogm.datastore.database" value="EthUsers" />
+             <property name="hibernate.ogm.datastore.host" value="192.168.56.1:27017"/>
+            <property name="hibernate.ogm.datastore.database" value="MultiChainDB" />
             <property name="hibernate.ogm.datastore.username" value="" />
   			<property name="hibernate.ogm.datastore.password" value="" />
         </properties>

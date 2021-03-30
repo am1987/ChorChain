@@ -322,6 +322,7 @@ module.controller("controller", [ "$scope","$window", "$location", "service", '$
 			}
 
 			$scope.hyperledgerDeploy = function(idChorLedger){
+			    window.alert("Please wait some minutes until the Fabric deploy is completed")
 				service.hyperledgerDeploy(idChorLedger).then(function(response){
 					console.log(response);
 				});
