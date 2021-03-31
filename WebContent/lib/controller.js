@@ -23,6 +23,7 @@ module.controller("controller", [ "$scope","$window", "$location", "service", '$
 			$scope.myContract = {};
 			$scope.selectedRoles = [];
 			$scope.task = {};
+			$scope.redirect = " ";
 			$scope.visibleAtFields = [
 			        {}
 			    ];
@@ -195,7 +196,7 @@ module.controller("controller", [ "$scope","$window", "$location", "service", '$
 						} else {
 							$cookies.put('UserId', response.data);
 							$scope.cookieId = response.data;
-							window.location.href = 'http://virtualpros.unicam.it:8080/ChorChain/homePage.html';
+							window.location.href = $scope.redirect + 'homePage.html';
 						}
 
 					});
@@ -269,7 +270,7 @@ module.controller("controller", [ "$scope","$window", "$location", "service", '$
 				service.deploy(model, instanceId, $cookies.get('UserId')).then(function(response){
 					//console.log(response.data);
 					sessionStorage.setItem('contract', JSON.stringify(response.data));
-					$window.location.href = 'http://193.205.92.133:8080/ChorChain/deploy.html';
+					$window.location.href = $scope.redirect + 'deploy.html';
 				});
 			}
 			
@@ -304,7 +305,7 @@ module.controller("controller", [ "$scope","$window", "$location", "service", '$
 					}).then(function(receipt){
 						console.log(receipt);
 						service.newSubscribe(instanceId, user.role, $cookies.get('UserId')).then(function(receipt){
-							console.log("yeee");
+
 						});
 					});*/
 				});
@@ -352,9 +353,18 @@ module.controller("controller", [ "$scope","$window", "$location", "service", '$
 					$scope.isLogged = false;
 				}
 			}
+
+			$scope.setOs = function(flag){
+				if (flag==1){
+					$scope.redirect = "http://localhost:8080/ChorChain_war_exploded/"
+				} else if(flag==2){
+					$scope.redirect = "http://virtualpros.unicam.it:8080/ChorChain/"
+				}
+			}
 			
 			//$scope.setUser();
 			$scope.addMeta();
+			$scope.setOs(1);
 			
 			
    }]);

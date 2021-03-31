@@ -134,7 +134,7 @@ public class ContractFunctions {
 			//System.out.println("Solidity PATTT: " + solPath);
 			String destinationPath = projectPath +  File.separator + "resources";//sostituire compiled a resources
 			//System.out.println("destination path "+destinationPath);
-			String[] comm = { "solc", solPath, "--bin", "--abi", "--overwrite", "-o", destinationPath };
+			String[] comm = { "solc_old", solPath, "--bin", "--abi", "--overwrite", "-o", destinationPath };
 			
 			
 			//String comm = "solc " + solPath + "--bin --abi --optimize -o " + destinationPath;
@@ -344,20 +344,6 @@ public class ContractFunctions {
 		 
 		  BigInteger blockGasLimit = web3j.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, false).send().getBlock().getGasLimit();
 		  
-
-		  Transaction transaction = Transaction.createContractTransaction(
-			        VirtualProsAccount,
-				  	nonce,
-			        GAS_PRICE,
-	                GAS_LIMIT,
-	                BigInteger.ZERO,
-			        binar);
-		  
-		  EthEstimateGas estimation = web3j.ethEstimateGas(transaction).send();
-		  BigInteger amountUsed = estimation.getAmountUsed();
-		  System.out.println("AMOUNT OF GAS USED: " + amountUsed + "AND current gas block limit(not used): " + blockGasLimit);
-		  
-		  
 		  Transaction transaction1 = Transaction.createContractTransaction(
 			        VirtualProsAccount,
 				  	nonce,
@@ -366,6 +352,9 @@ public class ContractFunctions {
 	                BigInteger.ZERO,
 			        "0x"+binar);
 
+		  EthEstimateGas estimation = web3j.ethEstimateGas(transaction1).send();
+		  BigInteger amountUsed = estimation.getAmountUsed();
+		  // System.out.println("AMOUNT OF GAS USED: " + amountUsed + "AND current gas block limit(not used): " + blockGasLimit);
 		  //send sync
 		  EthSendTransaction transactionResponse = web3j.ethSendTransaction(transaction1).sendAsync().get();
 

@@ -80,7 +80,7 @@ public class Controller {
 
 	// build the EntityManagerFactory as you would build in in Hibernate ORM
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("OGMPU");
-	
+
 
 	// now id is autoincremental, useless function.
 	/*
@@ -90,11 +90,22 @@ public class Controller {
 	 * FindIterable<Document> allElements = d.find(); int finalId = 0; if
 	 * (allElements != null) { for (Document docUser : allElements) { finalId =
 	 * docUser.getInteger("ID"); } }
-	 * 
+	 *
 	 * return finalId;
-	 * 
+	 *
 	 * }
 	 */
+	public String setOS(){
+		String redirect = " ";
+		String os = System.getProperty("os.name").toLowerCase();
+		if (os.contains("win") || os.contains("osx")){
+			redirect= "http://localhost:8080/ChorChain_war_exploded/homePage.html";
+		} else if (os.contains("nix") || os.contains("aix") || os.contains("nux")){
+			redirect="http://virtualpros.unicam.it:8080/ChorChain/homePage.html";
+		}
+		return redirect;
+	}
+
 
 	@POST
 	@Path("reg/")
@@ -228,7 +239,7 @@ public class Controller {
 		em.close();
 		//em.flush();
 		
-		return "<meta http-equiv=\"refresh\" content=\"0; url=http://virtualpros.unicam.it:8080/ChorChain/homePage.html\">";
+		return "<meta http-equiv=\"refresh\" content=\"0; url="+ setOS() +"\">";
 	}
 
 	@POST

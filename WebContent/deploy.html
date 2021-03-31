@@ -396,6 +396,7 @@
 				var newAmount = web3.utils.toWei(params, 'ether');
 
 				$scope.myContract.methods[replaced].apply(this, parArray).send({
+					chainId: 4,
 					from: $scope.user.address,
 					value: newAmount,
 					gas: 200000,
@@ -477,6 +478,7 @@
 
 							//console.log("no payment");
 							$scope.myContract.methods[method].apply(this, parArray).send({
+								chainId: 4,
 								from: $scope.user.address,
 								gas: 200000,
 							}).then(function (error, receipt) {
@@ -539,6 +541,8 @@
 			}
 			$scope.abi = JSON.parse($scope.actualContract.abi);
 			$scope.myContract = new web3.eth.Contract($scope.abi, $scope.actualContract.address);
+			$scope.myContract.defaultChain  = 'rinkeby';
+			console.log($scope.myContract.defaultChain);
 
 			$scope.myContract.methods.getCurrentState().call().then(function (receipt) {
 				$scope.$apply(function (recepit) {

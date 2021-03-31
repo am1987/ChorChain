@@ -85,7 +85,7 @@ angular.module('querying', ['ngCookies']).service('graphqlClientService', functi
         const secondsToMs = (date.getSeconds()) * 1000;
         const milliseconds = date.getMilliseconds();
         const totalMs = secondsToMs + milliseconds;
-        return $http.post('http://193.205.92.133:8547/graphql', jsonRequest);
+        return $http.post('http://193.205.92.133:8545/graphql', jsonRequest);
     }
 
     this.getTransactionData = async function (hash) {
